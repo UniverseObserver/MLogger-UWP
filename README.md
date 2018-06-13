@@ -3,8 +3,6 @@
 
 ![](MLogger-UWP/Assets/mlogger.png)
 
-[![license](https://img.shields.io/github/license/HITGIF/MLogger.svg)]()
-
 What is MLogger
 -------------------
 This is MLogger, Maple Leaf Wifi Logger. 
