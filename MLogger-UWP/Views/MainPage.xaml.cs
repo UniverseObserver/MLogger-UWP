@@ -84,7 +84,7 @@ namespace MLogger_UWP.Views {
 
                     await Task.Delay(800);
 
-                    if (result.Contains("认证成功")) {
+                    if (result.Contains("认证成功") || result.Contains("Microsoft Connect Test")) {
                         InfoTextBlock.Text = "Kissed!";
                     } else if (result.Contains("该IP已登录，请先注销")) {
                         InfoTextBlock.Text = "Kissed.";
