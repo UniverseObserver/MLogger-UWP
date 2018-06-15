@@ -57,10 +57,10 @@ namespace MLogger_UWP.Views {
             }
 
             try {
-                PasswordTextBox.Password = AppData.Values["usrname"].ToString();
+                PasswordTextBox.Password = AppData.Values["passwd"].ToString();
             } catch (System.NullReferenceException) {
                 AppData.Values["passwd"] = "";
-                PasswordTextBox.Password = AppData.Values["usrname"].ToString();
+                PasswordTextBox.Password = AppData.Values["passwd"].ToString();
             }
 
         }
