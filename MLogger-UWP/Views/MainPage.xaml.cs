@@ -80,6 +80,7 @@ namespace MLogger_UWP.Views {
                     Save();
 
                     string result = await Kiss(UrlTextBox.Text, UsernameTextBox.Text, PasswordTextBox.Password);
+                    result += await Kiss(UrlTextBox.Text, UsernameTextBox.Text, PasswordTextBox.Password);
                     Debug.WriteLine(result);
 
                     await Task.Delay(800);
