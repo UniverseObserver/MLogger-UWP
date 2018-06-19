@@ -8,13 +8,15 @@
 
     <x:Double x:Key="NarrowMinHeight">100</x:Double>
     <x:Double x:Key="NormalMinHeight">300</x:Double>
-
+<!-- Pink
     <Color x:Key="CustomColor">#FFFF4081</Color>
-    <!--Main color and -->
     <Color x:Key="ContrastColor">White</Color>
-    <!--Title bar text color-->
     <Color x:Key="SystemAccentColor">#FFF23D7A</Color>
-    <!--unknown-->
+-->
 
+    <Color x:Key="CustomColor">#FF0063b1</Color>
+    <Color x:Key="ContrastColor">White</Color>
+    <Color x:Key="SystemAccentColor">#FF0063b1</Color>
+    <!--unknown-->
 </ResourceDictionary>
 

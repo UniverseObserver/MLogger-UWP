@@ -14,7 +14,7 @@ namespace MLogger_UWP.Views {
         ApplicationDataContainer AppData = ApplicationData.Current.LocalSettings;
         
         public MainPage() {
-            SetUI();
+            SetUIBlack();
             InitializeComponent();
             InitAppData();
             // LoginButton.Focus(FocusState.Programmatic);
@@ -24,7 +24,23 @@ namespace MLogger_UWP.Views {
             }
         }
 
-        void SetUI() {
+        void SetUIBlue() {
+            var titleBar = ApplicationView.GetForCurrentView().TitleBar;
+            titleBar.BackgroundColor = Windows.UI.Color.FromArgb(255, 0, 99, 177);
+            titleBar.ForegroundColor = Windows.UI.Colors.White;
+            titleBar.ButtonBackgroundColor = Windows.UI.Color.FromArgb(255, 0, 99, 177);
+            titleBar.ButtonForegroundColor = Windows.UI.Colors.White;
+            titleBar.ButtonPressedBackgroundColor = Windows.UI.Color.FromArgb(0, 25, 114, 184);
+            titleBar.ButtonPressedForegroundColor = Windows.UI.Colors.White;
+            titleBar.ButtonInactiveBackgroundColor = Windows.UI.Color.FromArgb(255, 0, 99, 177);
+            titleBar.ButtonInactiveForegroundColor = Windows.UI.Colors.LightGray;
+            titleBar.InactiveBackgroundColor = Windows.UI.Color.FromArgb(255, 0, 99, 177);
+            titleBar.InactiveForegroundColor = Windows.UI.Colors.LightGray;
+            titleBar.ButtonHoverBackgroundColor = Windows.UI.Color.FromArgb(0, 25, 114, 184);
+            titleBar.ButtonHoverForegroundColor = Windows.UI.Colors.White;
+        }
+
+        void SetUIPink() {
             var titleBar = ApplicationView.GetForCurrentView().TitleBar;
             titleBar.BackgroundColor = Windows.UI.Color.FromArgb(255, 255, 64, 129);
             titleBar.ForegroundColor = Windows.UI.Colors.White;
@@ -37,6 +53,22 @@ namespace MLogger_UWP.Views {
             titleBar.InactiveBackgroundColor = Windows.UI.Color.FromArgb(255, 255, 64, 129);
             titleBar.InactiveForegroundColor = Windows.UI.Colors.LightGray;
             titleBar.ButtonHoverBackgroundColor = Windows.UI.Color.FromArgb(125, 242, 61, 122);
+            titleBar.ButtonHoverForegroundColor = Windows.UI.Colors.White;
+        }
+
+        void SetUIBlack() {
+            var titleBar = ApplicationView.GetForCurrentView().TitleBar;
+            titleBar.BackgroundColor = Windows.UI.Color.FromArgb(255, 0, 0, 0);
+            titleBar.ForegroundColor = Windows.UI.Colors.White;
+            titleBar.ButtonBackgroundColor = Windows.UI.Color.FromArgb(255, 0, 0, 0);
+            titleBar.ButtonForegroundColor = Windows.UI.Colors.White;
+            titleBar.ButtonPressedBackgroundColor = Windows.UI.Color.FromArgb(125, 0, 0, 0);
+            titleBar.ButtonPressedForegroundColor = Windows.UI.Colors.White;
+            titleBar.ButtonInactiveBackgroundColor = Windows.UI.Color.FromArgb(255, 0, 0, 0);
+            titleBar.ButtonInactiveForegroundColor = Windows.UI.Colors.LightGray;
+            titleBar.InactiveBackgroundColor = Windows.UI.Color.FromArgb(255, 0, 0, 0);
+            titleBar.InactiveForegroundColor = Windows.UI.Colors.LightGray;
+            titleBar.ButtonHoverBackgroundColor = Windows.UI.Color.FromArgb(125, 0, 0, 0);
             titleBar.ButtonHoverForegroundColor = Windows.UI.Colors.White;
         }
 
@@ -73,6 +105,7 @@ namespace MLogger_UWP.Views {
 
         async void Login() {
 
+            SetUIBlue();
             Views.Busy.SetBusy(true, "Kissing");
 
             if (UsernameTextBox.Text != "" && PasswordTextBox.Password != "") {
@@ -110,6 +143,7 @@ namespace MLogger_UWP.Views {
             }
 
             Views.Busy.SetBusy(false);
+            SetUIBlack();
         }
 
         private void LoginButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e) {

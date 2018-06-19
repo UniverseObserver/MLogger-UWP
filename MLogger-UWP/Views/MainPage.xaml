@@ -40,15 +40,22 @@
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
-        <Grid>
-            <StackPanel x:Name="UsrInfoPanel" Margin="0,0,0,50" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" >
+        <RelativePanel>
+            <StackPanel 
+                RelativePanel.AlignVerticalCenterWithPanel="True"
+                RelativePanel.AlignHorizontalCenterWithPanel="True"
+                x:Name="UsrInfoPanel" 
+                Margin="0,0,0,50" 
+                Orientation="Vertical" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center" > 
                 <Image 
                     x:Name="LogoImg" 
                     Source="/Assets/mlogger.png" 
                     Width="170" 
                     Height="170" 
                     Stretch="Uniform" 
-                    Margin="20"  />
+                    Margin="20"  /> 
                 <StackPanel 
                     HorizontalAlignment="Center" 
                     VerticalAlignment="Center" 
@@ -70,30 +77,32 @@
                         PlaceholderText="Password"/>
                     <Button 
                         x:Name="LoginButton" 
-                        Background="#FFFF4081" 
+                        Background="#FF0063b1" 
                         Foreground="White" 
                         Content="Login" 
                         Click="LoginButton_Click" 
                         Width="80" 
                         HorizontalAlignment="Center" 
-                        Margin="0,0,0,20" />
+                        Margin="0,0,0,0" />
                 </StackPanel>
             </StackPanel>
-            <Grid>
-                <!--copyright-->
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="3*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <TextBlock 
-                    x:Name="InfoTextBlock" 
-                    Grid.Row="1" 
-                    Text="MLogger, Maple Leaf Wifi Logger, an alternative of login webpage." 
-                    TextAlignment="Center" VerticalAlignment="Center" 
-                    FontSize="14"/>
-            </Grid>
-        </Grid>
+            <Border 
+                
+                BorderThickness="0" 
+                Background="#FF0063b1" 
+                RelativePanel.AlignBottomWithPanel="True"
+                RelativePanel.AlignLeftWithPanel="True"
+                RelativePanel.AlignRightWithPanel="True"
+                BorderBrush="#FF0063b1">
+                <RelativePanel>
+                    <TextBlock 
+                        Name="InfoTextBlock" 
+                        FontSize="12"
+                        Text="MLogger, Maple Leaf Wifi Logger, an alternative of login webpage."  
+                        Margin="8,6,0,6" />
+                </RelativePanel>
+            </Border>
+
+        </RelativePanel>
     </Grid>
-
-
 </Page>
