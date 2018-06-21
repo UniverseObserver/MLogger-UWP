@@ -6,7 +6,7 @@ using Template10.Controls;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace MLogger_UWP.Views {
+namespace MLogger.Views {
     public sealed partial class Busy : UserControl {
         public Busy() {
             InitializeComponent();

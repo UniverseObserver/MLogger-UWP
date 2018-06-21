@@ -8,18 +8,19 @@ using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace MLogger_UWP.Views {
+namespace MLogger.Views {
     public sealed partial class MainPage : Page {
 
         ApplicationDataContainer AppData = ApplicationData.Current.LocalSettings;
-        
+        int BottomBar_Tapped_Counter = 0;
+
         public MainPage() {
             SetUIBlack();
             InitializeComponent();
             InitAppData();
             // LoginButton.Focus(FocusState.Programmatic);
             UrlTextBox.Text = AppData.Values["apiurl"].ToString();
-            if (UsernameTextBox.Text != "" && PasswordTextBox.Password != "") {
+            if (FakeUsernameTextBox.Text != "" && PasswordTextBox.Password != "") {
                 Login();
             }
         }
@@ -39,7 +40,6 @@ namespace MLogger_UWP.Views {
             titleBar.ButtonHoverBackgroundColor = Windows.UI.Color.FromArgb(0, 25, 114, 184);
             titleBar.ButtonHoverForegroundColor = Windows.UI.Colors.White;
         }
-
         void SetUIPink() {
             var titleBar = ApplicationView.GetForCurrentView().TitleBar;
             titleBar.BackgroundColor = Windows.UI.Color.FromArgb(255, 255, 64, 129);
@@ -55,7 +55,6 @@ namespace MLogger_UWP.Views {
             titleBar.ButtonHoverBackgroundColor = Windows.UI.Color.FromArgb(125, 242, 61, 122);
             titleBar.ButtonHoverForegroundColor = Windows.UI.Colors.White;
         }
-
         void SetUIBlack() {
             var titleBar = ApplicationView.GetForCurrentView().TitleBar;
             titleBar.BackgroundColor = Windows.UI.Color.FromArgb(255, 0, 0, 0);
@@ -82,11 +81,19 @@ namespace MLogger_UWP.Views {
             }
 
             try {
-                UsernameTextBox.Text = AppData.Values["usrname"].ToString();
+                FakeUsernameTextBox.Text = AppData.Values["fakeUsername"].ToString();
             } catch (System.NullReferenceException) {
-                AppData.Values["usrname"] = "";
-                UsernameTextBox.Text = AppData.Values["usrname"].ToString();
+                AppData.Values["fakeUsername"] = "";
+                FakeUsernameTextBox.Text = AppData.Values["fakeUsername"].ToString();
             }
+
+            try {
+                string s = AppData.Values["realUsername"].ToString();
+            } catch (System.NullReferenceException) {
+                AppData.Values["realUsername"] = "";
+            }
+
+            //realUsername
 
             try {
                 PasswordTextBox.Password = AppData.Values["passwd"].ToString();
@@ -99,7 +106,7 @@ namespace MLogger_UWP.Views {
 
         void Save() {
             AppData.Values["apiurl"] = UrlTextBox.Text.ToString();
-            AppData.Values["usrname"] = UsernameTextBox.Text.ToString();
+            AppData.Values["fakeUsername"] = FakeUsernameTextBox.Text.ToString();
             AppData.Values["passwd"] = PasswordTextBox.Password.ToString();
         }
 
@@ -108,12 +115,23 @@ namespace MLogger_UWP.Views {
             SetUIBlue();
             Views.Busy.SetBusy(true, "Kissing");
 
-            if (UsernameTextBox.Text != "" && PasswordTextBox.Password != "") {
+            if (FakeUsernameTextBox.Text != "" && PasswordTextBox.Password != "") {
                 try {
+                    string url = UrlTextBox.Text;
+                    string passwd = PasswordTextBox.Password;
+                    string username;
+
+                    bool hasAFakeName = (AppData.Values["realUsername"].ToString() != "");
+                    if (hasAFakeName) {
+                        username = AppData.Values["realUsername"].ToString();
+                    } else {
+                        username = FakeUsernameTextBox.Text;
+                    }
+
                     Save();
 
-                    string result = await Kiss(UrlTextBox.Text, UsernameTextBox.Text, PasswordTextBox.Password);
-                    result += await Kiss(UrlTextBox.Text, UsernameTextBox.Text, PasswordTextBox.Password);
+                    string result = await Kiss(url, username, passwd);
+                    result += await Kiss(url, username, passwd);
                     Debug.WriteLine(result);
 
                     await Task.Delay(800);
@@ -167,5 +185,14 @@ namespace MLogger_UWP.Views {
             return await response.Content.ReadAsStringAsync();
         }
 
+        private async void BottomBar_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e) {
+            BottomBar_Tapped_Counter++;
+            if (BottomBar_Tapped_Counter == 13) {
+                BottomBar_Tapped_Counter = 0;
+                MLogger.Views.FakeUsernameDialog dialog = new MLogger.Views.FakeUsernameDialog();
+                await dialog.ShowAsync();
+                FakeUsernameTextBox.Text = AppData.Values["fakeUsername"].ToString();
+            }
+        }
     }
 }

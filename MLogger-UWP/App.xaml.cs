@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml.Data;
 
-namespace MLogger_UWP {
+namespace MLogger {
     /// Documentation on APIs used in this page:
     /// https://github.com/Windows-XAML/Template10/wiki
 

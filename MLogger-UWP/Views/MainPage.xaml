@@ -1,13 +1,13 @@
-﻿<Page x:Class="MLogger_UWP.Views.MainPage"
+﻿<Page x:Class="MLogger.Views.MainPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
       xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
       xmlns:controls="using:Template10.Controls"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:local="using:MLogger_UWP.Views"
+      xmlns:local="using:MLogger.Views"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:vm="using:MLogger_UWP.ViewModels" mc:Ignorable="d">
+      xmlns:vm="using:MLogger.ViewModels" mc:Ignorable="d">
 
     <Grid 
         Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -22,7 +22,7 @@
                         <Setter Target="UsrInfoPanel.Orientation" Value="Horizontal" />
                         <Setter Target="UsrInfoPanel.Margin" Value="0,0,0,0"/>
                         <Setter Target="PasswordTextBox.Width" Value="250"/>
-                        <Setter Target="UsernameTextBox.Width" Value="250"/>
+                        <Setter Target="FakeUsernameTextBox.Width" Value="250"/>
                         <Setter Target="UrlTextBox.Width" Value="250"/>
                     </VisualState.Setters>
                 </VisualState>
@@ -33,7 +33,7 @@
                     <VisualState.Setters>
                         <Setter Target="UsrInfoPanel.Orientation" Value="Vertical" />
                         <Setter Target="PasswordTextBox.Width" Value="350"/>
-                        <Setter Target="UsernameTextBox.Width" Value="350"/>
+                        <Setter Target="FakeUsernameTextBox.Width" Value="350"/>
                         <Setter Target="UrlTextBox.Width" Value="350"/>
                     </VisualState.Setters>
                 </VisualState>
@@ -66,7 +66,7 @@
                         Width="250" 
                         PlaceholderText="URL: Default"/>
                     <TextBox 
-                        x:Name="UsernameTextBox" 
+                        x:Name="FakeUsernameTextBox" 
                         Margin="0,0,0,10" 
                         Width="250" 
                         PlaceholderText="User name"/>
@@ -93,7 +93,7 @@
                 RelativePanel.AlignBottomWithPanel="True"
                 RelativePanel.AlignLeftWithPanel="True"
                 RelativePanel.AlignRightWithPanel="True"
-                BorderBrush="#FF0063b1">
+                BorderBrush="#FF0063b1" Tapped="BottomBar_Tapped">
                 <RelativePanel>
                     <TextBlock 
                         Name="InfoTextBlock" 
