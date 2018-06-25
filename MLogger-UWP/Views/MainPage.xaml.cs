@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Core;
 using Windows.Storage;
+using Windows.UI;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -13,12 +15,11 @@ namespace MLogger.Views {
 
         ApplicationDataContainer AppData = ApplicationData.Current.LocalSettings;
         int BottomBar_Tapped_Counter = 0;
-
         public MainPage() {
-            SetUIBlack();
+
             InitializeComponent();
+            SetUIBlack();
             InitAppData();
-            // LoginButton.Focus(FocusState.Programmatic);
             UrlTextBox.Text = AppData.Values["apiurl"].ToString();
             if (FakeUsernameTextBox.Text != "" && PasswordTextBox.Password != "") {
                 Login();
@@ -39,6 +40,11 @@ namespace MLogger.Views {
             titleBar.InactiveForegroundColor = Windows.UI.Colors.LightGray;
             titleBar.ButtonHoverBackgroundColor = Windows.UI.Color.FromArgb(0, 25, 114, 184);
             titleBar.ButtonHoverForegroundColor = Windows.UI.Colors.White;
+            if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.Xaml.Media.XamlCompositionBrushBase")) {
+                CoreApplication.GetCurrentView().TitleBar.ExtendViewIntoTitleBar = true;
+                titleBar.ButtonBackgroundColor = Colors.Transparent;
+                titleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
+            }
         }
         void SetUIPink() {
             var titleBar = ApplicationView.GetForCurrentView().TitleBar;
@@ -54,6 +60,11 @@ namespace MLogger.Views {
             titleBar.InactiveForegroundColor = Windows.UI.Colors.LightGray;
             titleBar.ButtonHoverBackgroundColor = Windows.UI.Color.FromArgb(125, 242, 61, 122);
             titleBar.ButtonHoverForegroundColor = Windows.UI.Colors.White;
+            if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.Xaml.Media.XamlCompositionBrushBase")) {
+                CoreApplication.GetCurrentView().TitleBar.ExtendViewIntoTitleBar = true;
+                titleBar.ButtonBackgroundColor = Colors.Transparent;
+                titleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
+            }
         }
         void SetUIBlack() {
             var titleBar = ApplicationView.GetForCurrentView().TitleBar;
@@ -69,6 +80,11 @@ namespace MLogger.Views {
             titleBar.InactiveForegroundColor = Windows.UI.Colors.LightGray;
             titleBar.ButtonHoverBackgroundColor = Windows.UI.Color.FromArgb(125, 0, 0, 0);
             titleBar.ButtonHoverForegroundColor = Windows.UI.Colors.White;
+            if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.Xaml.Media.XamlCompositionBrushBase")) {
+                CoreApplication.GetCurrentView().TitleBar.ExtendViewIntoTitleBar = true;
+                titleBar.ButtonBackgroundColor = Colors.Transparent;
+                titleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
+            }
         }
 
         void InitAppData() {
@@ -143,7 +159,7 @@ namespace MLogger.Views {
                     } else if (result.Contains("被冻结")) {
                         InfoTextBlock.Text = "This account is forbidden.";
                     } else {
-                        InfoTextBlock.Text = "Something went wrong.";
+                        InfoTextBlock.Text = "016 is dead. Mismatch. ";
                     }
                 } catch (Exception) {
                     ContentDialog ErrorContentDialog = new ContentDialog {
@@ -152,7 +168,8 @@ namespace MLogger.Views {
                         CloseButtonText = "哦。",
                     }; ContentDialogResult result = await ErrorContentDialog.ShowAsync();
                 }
-            } else {
+            } 
+            else {
                 ContentDialog ErrorContentDialog = new ContentDialog {
                     Title = "ERROR",
                     Content = "Please enter username and/or password",
@@ -164,7 +181,7 @@ namespace MLogger.Views {
             SetUIBlack();
         }
 
-        private void LoginButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e) {
+        private void OnLoginButtonClick(object sender, Windows.UI.Xaml.RoutedEventArgs e) {
             Login();
         }
 
@@ -185,13 +202,54 @@ namespace MLogger.Views {
             return await response.Content.ReadAsStringAsync();
         }
 
-        private async void BottomBar_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e) {
+        private async void OnBottomBarTap(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e) {
             BottomBar_Tapped_Counter++;
             if (BottomBar_Tapped_Counter == 13) {
                 BottomBar_Tapped_Counter = 0;
                 MLogger.Views.FakeUsernameDialog dialog = new MLogger.Views.FakeUsernameDialog();
                 await dialog.ShowAsync();
                 FakeUsernameTextBox.Text = AppData.Values["fakeUsername"].ToString();
+            }
+        }
+
+        private void OnGridLoad(object sender, RoutedEventArgs e) {
+            if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.Xaml.Media.XamlCompositionBrushBase")) {
+                Grid grid = sender as Grid;
+                Windows.UI.Xaml.Media.AcrylicBrush acrylicBrush = new Windows.UI.Xaml.Media.AcrylicBrush();
+                acrylicBrush.BackgroundSource = Windows.UI.Xaml.Media.AcrylicBackgroundSource.HostBackdrop;
+                acrylicBrush.TintColor = Color.FromArgb(255, 0, 0, 0);
+                acrylicBrush.FallbackColor = Color.FromArgb(255, 0, 0, 0);
+                acrylicBrush.TintOpacity = 0.6;
+                grid.Background = acrylicBrush;
+
+                CoreApplication.GetCurrentView().TitleBar.ExtendViewIntoTitleBar = true;
+                ApplicationViewTitleBar titleBar = ApplicationView.GetForCurrentView().TitleBar;
+                titleBar.ButtonBackgroundColor = Colors.Transparent;
+                titleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
+            } 
+        }
+
+        private void OnBorderLoad(object sender, RoutedEventArgs e) {
+            if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.Xaml.Media.XamlCompositionBrushBase")) {
+                Border border = sender as Border;
+                Windows.UI.Xaml.Media.AcrylicBrush acrylicBrush = new Windows.UI.Xaml.Media.AcrylicBrush();
+                acrylicBrush.BackgroundSource = Windows.UI.Xaml.Media.AcrylicBackgroundSource.HostBackdrop;
+                acrylicBrush.TintColor = Color.FromArgb(255, 0, 99, 177);
+                acrylicBrush.FallbackColor = Color.FromArgb(255, 0, 99, 177);
+                acrylicBrush.TintOpacity = 0.6;
+                border.Background = acrylicBrush;
+            }
+        }
+
+        private void OnButtonLoad(object sender, RoutedEventArgs e) {
+            if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.Xaml.Media.XamlCompositionBrushBase")) {
+                Button button= sender as Button;
+                Windows.UI.Xaml.Media.AcrylicBrush acrylicBrush = new Windows.UI.Xaml.Media.AcrylicBrush();
+                acrylicBrush.BackgroundSource = Windows.UI.Xaml.Media.AcrylicBackgroundSource.HostBackdrop;
+                acrylicBrush.TintColor = Color.FromArgb(255, 0, 99, 177);
+                acrylicBrush.FallbackColor = Color.FromArgb(255, 0, 99, 177);
+                acrylicBrush.TintOpacity = 0.6;
+                button.Background = acrylicBrush;
             }
         }
     }

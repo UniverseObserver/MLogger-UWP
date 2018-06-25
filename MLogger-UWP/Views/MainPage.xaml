@@ -7,11 +7,13 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="using:MLogger.Views"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:vm="using:MLogger.ViewModels" mc:Ignorable="d">
+      xmlns:vm="using:MLogger.ViewModels" 
+      mc:Ignorable="d">
 
     <Grid 
-        Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+        Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+        Loaded="OnGridLoad">
+        
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="AdaptiveVisualStateGroup">
                 <VisualState x:Name="VisualStateNarrow">
@@ -50,6 +52,7 @@
                 HorizontalAlignment="Center" 
                 VerticalAlignment="Center" > 
                 <Image 
+                    
                     x:Name="LogoImg" 
                     Source="/Assets/mlogger.png" 
                     Width="170" 
@@ -76,24 +79,25 @@
                         Width="250" 
                         PlaceholderText="Password"/>
                     <Button 
+                        Loaded="OnButtonLoad"
                         x:Name="LoginButton" 
                         Background="#FF0063b1" 
                         Foreground="White" 
                         Content="Login" 
-                        Click="LoginButton_Click" 
+                        Click="OnLoginButtonClick" 
                         Width="80" 
                         HorizontalAlignment="Center" 
                         Margin="0,0,0,0" />
                 </StackPanel>
             </StackPanel>
             <Border 
-                
+                Loaded="OnBorderLoad"
                 BorderThickness="0" 
                 Background="#FF0063b1" 
                 RelativePanel.AlignBottomWithPanel="True"
                 RelativePanel.AlignLeftWithPanel="True"
                 RelativePanel.AlignRightWithPanel="True"
-                BorderBrush="#FF0063b1" Tapped="BottomBar_Tapped">
+                BorderBrush="#FF0063b1" Tapped="OnBottomBarTap">
                 <RelativePanel>
                     <TextBlock 
                         Name="InfoTextBlock" 
