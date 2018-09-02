@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="6906cf59-d9f6-4de4-90fb-cd8b07875b8e" Publisher="CN=daren" Version="1.0.1.0" />
-  <mp:PhoneIdentity PhoneProductId="6906cf59-d9f6-4de4-90fb-cd8b07875b8e" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Identity Name="58761VoidUniversalObserve.MLogger" Publisher="CN=AF509DF3-20F9-44DA-8F0C-99829E7E4AA6" Version="1.0.0.0" />
+  <mp:PhoneIdentity PhoneProductId="230c21c7-57f5-4f4f-9dd7-85b28e0ce808" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>Set DisplayName in AppxManifest/Packaging</DisplayName>
-    <PublisherDisplayName>Set PublisherName in AppxManifest/Packaging</PublisherDisplayName>
+    <DisplayName>MLogger</DisplayName>
+    <PublisherDisplayName>Void Universal Observer</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   <Dependencies>
